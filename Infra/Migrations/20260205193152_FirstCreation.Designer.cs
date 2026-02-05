@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20260129162216_Initial_ContextBase")]
-    partial class Initial_ContextBase
+    [Migration("20260205193152_FirstCreation")]
+    partial class FirstCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,14 +34,12 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CEP")
-                        .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<string>("CPF")
-                        .IsRequired()
+                    b.Property<int>("CPF")
                         .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("int");
 
                     b.Property<string>("CompEndereco")
                         .HasMaxLength(100)
@@ -59,7 +57,6 @@ namespace Infra.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -76,7 +73,6 @@ namespace Infra.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -100,12 +96,11 @@ namespace Infra.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
+                    b.Property<int>("Telefone")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("int");
 
-                    b.Property<int>("Tipo")
+                    b.Property<int?>("Tipo")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")

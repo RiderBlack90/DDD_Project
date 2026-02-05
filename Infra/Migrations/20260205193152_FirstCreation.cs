@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_ContextBase : Migration
+    public partial class FirstCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,15 +30,15 @@ namespace Infra.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CPF = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
+                    CPF = table.Column<int>(type: "int", maxLength: 14, nullable: false),
                     Idade = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CEP = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CEP = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
+                    Endereco = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CompEndereco = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Telefone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Telefone = table.Column<int>(type: "int", maxLength: 20, nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
-                    Tipo = table.Column<int>(type: "int", nullable: false),
+                    Tipo = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

@@ -11,26 +11,24 @@ namespace Entities.Entities;
 
 public class ApplicationUser : IdentityUser
 {
-    [Required, MaxLength(14)]
-    public string CPF { get; set; } = null!;
-
-    [Required]
+    [MaxLength(14)]
+    public int CPF { get; set; }
     public int Idade { get; set; }
 
-    [Required, MaxLength(100)]
-    public string Nome { get; set; } = null!;
+    [MaxLength(100)]
+    public string? Nome { get; set; }
 
-    [Required, MaxLength(9)]
-    public string CEP { get; set; } = null!;
+    [MaxLength(9)]
+    public string? CEP { get; set; } 
 
-    [Required, MaxLength(100)]
-    public string Endereco { get; set; } = null!;
+    [MaxLength(100)]
+    public string? Endereco { get; set; }
 
     [MaxLength(100)]
     public string? CompEndereco { get; set; }
 
-    [Required, MaxLength(20)]
-    public string Telefone { get; set; } = null!;
+    [MaxLength(20)]
+    public int Telefone { get; set; }
 
     public bool Estado { get; set; } // ativo/inativo
 
