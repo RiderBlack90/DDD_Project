@@ -17,7 +17,7 @@ public class ServiceProduct : IServicesProduct
     }
     public async Task AddProduct(Produto produto)
     {
-        var ValidateName = produto.ValidateStringProperty(produto.PropertyName, "Nome");
+        var ValidateName = produto.ValidateStringProperty(produto.Nome, "Nome");
         var ValidateValue = produto.ValidateDecimalValue(produto.Valor, "Valor");
 
         if (ValidateName && ValidateValue)
@@ -31,7 +31,7 @@ public class ServiceProduct : IServicesProduct
     public async Task UpdateProduct(Produto produto)
     {
 
-        var ValidateName = produto.ValidateStringProperty(produto.PropertyName, "Nome");
+        var ValidateName = produto.ValidateStringProperty(produto.Nome, "Nome");
         var ValidateValue = produto.ValidateDecimalValue(produto.Valor, "Valor");
 
         if (ValidateName && ValidateValue)

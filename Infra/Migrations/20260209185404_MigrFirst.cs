@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_ContextBase : Migration
+    public partial class MigrFirst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,7 @@ namespace Infra.Migrations
                     CompEndereco = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Telefone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
-                    Tipo = table.Column<int>(type: "int", nullable: false),
+                    Tipo = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -199,23 +199,23 @@ namespace Infra.Migrations
                     PRD_ID = table.Column<int>(type: "int", nullable: false),
                     CUS_ESTADO = table.Column<int>(type: "int", nullable: false),
                     CSU_QTD = table.Column<int>(type: "int", nullable: false),
-                    USR_ID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    USR_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_COMPRA_USUARIO", x => x.CUS_ID);
                     table.ForeignKey(
-                        name: "FK_TB_COMPRA_USUARIO_AspNetUsers_USR_ID",
-                        column: x => x.USR_ID,
+                        name: "FK_TB_COMPRA_USUARIO_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TB_COMPRA_USUARIO_Product_PRD_ID",
                         column: x => x.PRD_ID,
                         principalTable: "Product",
                         principalColumn: "PRD_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -263,14 +263,14 @@ namespace Infra.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TB_COMPRA_USUARIO_ApplicationUserId",
+                table: "TB_COMPRA_USUARIO",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TB_COMPRA_USUARIO_PRD_ID",
                 table: "TB_COMPRA_USUARIO",
                 column: "PRD_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TB_COMPRA_USUARIO_USR_ID",
-                table: "TB_COMPRA_USUARIO",
-                column: "USR_ID");
         }
 
         /// <inheritdoc />

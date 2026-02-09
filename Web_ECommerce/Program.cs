@@ -16,18 +16,14 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-
 // ==========================
-// DATABASE
+// DATABASE (apenas UMA connection string)
 // ==========================
 services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(
-        configuration.GetConnectionString("DefaultConnection")
-    ));
-
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 // ==========================
-// IDENTITY
+// IDENTITY (apenas UM tipo de user)
 // ==========================
 services.AddDefaultIdentity<ApplicationUser>(options =>
 {
@@ -35,36 +31,29 @@ services.AddDefaultIdentity<ApplicationUser>(options =>
 })
 .AddEntityFrameworkStores<ContextBase>();
 
-
-
 // ==========================
 // MVC / RAZOR
 // ==========================
 services.AddControllersWithViews();
 services.AddRazorPages();
 
-
 // ==========================
 // REPOSITÓRIO
 // ==========================
 services.AddScoped(typeof(IGeneric<>), typeof(GenericRepository<>));
 services.AddScoped<IProduct, ProductRepository>();
- 
 
 // ==========================
 // APLICAÇÃO
 // ==========================
 services.AddScoped<InterfaceProductApp, ProductApp>();
 
-
 // ==========================
 // DOMÍNIO
 // ==========================
 services.AddScoped<IServicesProduct, ServiceProduct>();
 
-
 var app = builder.Build();
-
 
 // ==========================
 // PIPELINE
@@ -85,7 +74,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Products}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

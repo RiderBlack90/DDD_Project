@@ -44,14 +44,14 @@ public class ProductsController : Controller
                 {
                     ModelState.AddModelError(item.PropertyName, item.mensagem);
                 }
-                return View("Edit", produto);
+                return View("Create", produto);
             }
 
-            
+
         }
         catch
         {
-            return View("Edit", produto);
+            return View("Create", produto);
         }
         return RedirectToAction(nameof(Index));
     }
@@ -59,7 +59,7 @@ public class ProductsController : Controller
     // GET: ProductsController/Edit/5
     public async Task<IActionResult> Edit(int id)
     {
-        return View();
+        return View(await _IProductApp.GetEntityById(id));
     }
 
     // POST: ProductsController/Edit/5
@@ -69,7 +69,7 @@ public class ProductsController : Controller
     {
         try
         {
-            await _IProductApp.EditProduct(produto);
+            await _IProductApp.UpdateProduct(produto);
             if (produto.Notcations.Any())
             {
                 foreach (var item in produto.Notcations)
@@ -91,7 +91,7 @@ public class ProductsController : Controller
     // GET: ProductsController/Delete/5
     public async Task<IActionResult> Delete(int id)
     {
-        return View();
+        return View(await _IProductApp.GetEntityById(id));
     }
 
     // POST: ProductsController/Delete/5

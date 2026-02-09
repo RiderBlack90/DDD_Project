@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.IProducts;
 using Entities.Entities;
+using Infra.Configuration;
 using Infra.Repositories.Generics;
 using System;
 using System.Collections.Generic;
@@ -11,4 +12,5 @@ namespace Infra.Repositories;
 
 public class ProductRepository : GenericRepository<Produto>, IProduct
 {
+    public ProductRepository(ContextBase context) : base(context) { }
 }

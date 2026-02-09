@@ -9,7 +9,10 @@ namespace Entities.Notifications;
 public class Notifiers
 {
 
-    public Notifiers() { }
+    public Notifiers()
+    {
+        Notcations = new List<Notifiers>();
+    }
 
     [NotMapped]
     public string PropertyName {  get; set; }

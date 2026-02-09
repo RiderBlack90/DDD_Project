@@ -1,62 +1,43 @@
 ﻿using Domain.Interfaces.Generics;
 using Infra.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infra.Repositories.Generics;
 
 public class GenericRepository<T> : IGeneric<T> where T : class
 {
-    private readonly DbContextOptions<ContextBase> _OptionsBuilder; 
+    private readonly ContextBase _context;
 
-    public GenericRepository()
+    public GenericRepository(ContextBase context)
     {
-        _OptionsBuilder = new DbContextOptions<ContextBase>();
+        _context = context;
     }
+
     public async Task Add(T Object)
     {
-        using(var data = new ContextBase(_OptionsBuilder))
-        {
-            await data.Set<T>().AddAsync(Object);
-            await data.SaveChangesAsync();
-        }
+        await _context.Set<T>().AddAsync(Object);
+        await _context.SaveChangesAsync();
     }
 
     public async Task Delete(T Object)
     {
-        using (var data = new ContextBase(_OptionsBuilder))
-        {
-            data.Set<T>().Remove(Object);
-            await data.SaveChangesAsync();
-        }
+        _context.Set<T>().Remove(Object);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<T> GetEntityById(int id)
     {
-        using (var data = new ContextBase(_OptionsBuilder))
-        {
-            return await data.Set<T>().FindAsync(id);
-        }
+        return await _context.Set<T>().FindAsync(id);
     }
 
     public async Task<List<T>> List()
     {
-        using (var data = new ContextBase(_OptionsBuilder))
-        {
-            return await data.Set<T>().AsNoTracking().ToListAsync();
-        }
+        return await _context.Set<T>().AsNoTracking().ToListAsync();
     }
 
     public async Task Update(T Object)
     {
-        using (var data = new ContextBase(_OptionsBuilder))
-        {
-            data.Set<T>().Update(Object);
-            await data.SaveChangesAsync();
-        }
+        _context.Set<T>().Update(Object);
+        await _context.SaveChangesAsync();
     }
 }
