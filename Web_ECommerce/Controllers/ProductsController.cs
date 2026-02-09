@@ -15,7 +15,7 @@ public class ProductsController : Controller
     // GET: ProductsController
     public async Task<IActionResult> Index()
     {
-        return View(await _IProductApp.List());
+        return View(await _IProductApp.List()); //Comentario bem comentado
     }
 
     // GET: ProductsController/Details/5
