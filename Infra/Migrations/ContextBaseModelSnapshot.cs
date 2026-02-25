@@ -17,7 +17,7 @@ namespace Infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.12")
+                .HasAnnotation("ProductVersion", "10.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -189,7 +189,6 @@ namespace Infra.Migrations
                         .HasColumnName("PRD_NOME");
 
                     b.Property<string>("Observacao")
-                        .IsRequired()
                         .HasMaxLength(20000)
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PRD_OBS");
@@ -199,7 +198,6 @@ namespace Infra.Migrations
                         .HasColumnName("PRD_QTD_ESTOQUE");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasColumnOrder(1);
 
@@ -372,9 +370,7 @@ namespace Infra.Migrations
                 {
                     b.HasOne("Entities.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("ApplicationUser");
                 });

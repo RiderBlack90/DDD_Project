@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrFirst : Migration
+    public partial class FirstMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -169,12 +169,12 @@ namespace Infra.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PRD_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PRD_NOME = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PRD_DSC = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    PRD_OBS = table.Column<string>(type: "nvarchar(max)", maxLength: 20000, nullable: false),
+                    PRD_OBS = table.Column<string>(type: "nvarchar(max)", maxLength: 20000, nullable: true),
                     PRD_VAL = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PRD_QTD_ESTOQUE = table.Column<int>(type: "int", nullable: false),
                     PRD_ESTADO = table.Column<bool>(type: "bit", nullable: false)
@@ -186,8 +186,7 @@ namespace Infra.Migrations
                         name: "FK_Product_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

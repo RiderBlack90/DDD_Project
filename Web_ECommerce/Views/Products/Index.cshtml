@@ -19,16 +19,10 @@
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Observacao)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Valor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.QtdEstoque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
@@ -46,19 +40,10 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Observacao)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QtdEstoque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Entities.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Configuration;
 

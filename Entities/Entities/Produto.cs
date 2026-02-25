@@ -28,7 +28,7 @@ public class Produto : Notifiers
     [Column("PRD_OBS")]
     [Display(Name = "Observação")]
     [MaxLength(20000)]
-    public string Observacao { get; set; }
+    public string? Observacao { get; set; }
 
     [Column("PRD_VAL")]
     [Display(Name = "Valor")]
@@ -41,7 +41,7 @@ public class Produto : Notifiers
     [Display(Name = "Usuário")]
     [ForeignKey("ApplicationUser")]
     [Column(Order = 1)]
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
 
     public virtual ApplicationUser ApplicationUser { get; set; }
 
