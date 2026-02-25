@@ -18,14 +18,14 @@ public class ContextBase : IdentityDbContext<ApplicationUser>
         builder.Entity<CompraUsuario>(entity =>
         {
             entity.HasOne(x => x.Produto)
-                  .WithMany() 
+                  .WithMany()
                   .HasForeignKey(x => x.ProdutoId)
                   .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(x => x.ApplicationUser)
-                  .WithMany() 
+                  .WithMany()
                   .HasForeignKey(x => x.UserId)
                   .OnDelete(DeleteBehavior.Restrict);
-        });
+        }); //DB Connections
     }
 }
