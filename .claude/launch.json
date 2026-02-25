@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ECommerce_Web",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "ECommerce_Web/ECommerce_Web.csproj", "--launch-profile", "http"],
+      "port": 5062
+    },
+    {
+      "name": "Web_ECommerce",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "Web_ECommerce/Web_ECommerce.csproj", "--launch-profile", "http"],
+      "port": 5156
+    },
+    {
+      "name": "Presentation",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "Presentation/Presentation.csproj", "--launch-profile", "http"],
+      "port": 5044
+    }
+  ]
+}

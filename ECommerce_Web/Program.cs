@@ -1,3 +1,5 @@
+
+
 using ECommerce_Web.Data;
 using Entities.Entities;
 using Infra.Configuration;
@@ -17,7 +19,7 @@ builder.Services.AddDbContext<ContextBase>(options =>
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ContextBase>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

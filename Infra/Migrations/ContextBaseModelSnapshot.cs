@@ -31,12 +31,10 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CEP")
-                        .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("CPF")
-                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
@@ -56,7 +54,6 @@ namespace Infra.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -73,7 +70,6 @@ namespace Infra.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -98,7 +94,6 @@ namespace Infra.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -173,7 +168,6 @@ namespace Infra.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("PRD_DSC");
@@ -183,7 +177,6 @@ namespace Infra.Migrations
                         .HasColumnName("PRD_ESTADO");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("PRD_NOME");

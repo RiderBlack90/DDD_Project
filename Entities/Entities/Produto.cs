@@ -20,11 +20,11 @@ public class Produto : Notifiers
     [Column("PRD_NOME")]
     [Display(Name = "Nome")]
     [MaxLength(255)]
-    public string Nome { get; set; }
+    public string? Nome { get; set; }
     [Column("PRD_DSC")]
     [Display(Name = "Descrição")]
     [MaxLength(255)]
-    public string Descricao { get; set; }
+    public string? Descricao { get; set; }
     [Column("PRD_OBS")]
     [Display(Name = "Observação")]
     [MaxLength(20000)]
