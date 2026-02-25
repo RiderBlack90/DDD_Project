@@ -23,7 +23,7 @@ public class Notifiers
 
     public bool ValidateStringProperty(string value, string propertyName)
     {
-        if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(PropertyName))
+        if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(propertyName))
         {
             Notcations.Add(new Notifiers()
             {
