@@ -28,6 +28,8 @@ public class CompraUsuario : Notifiers
 
     [Column("USR_ID")]
     public string UserId { get; set; } = null!;
+
+    [ForeignKey("UserId")]
     public ApplicationUser ApplicationUser { get; set; } = null!;
 }
 

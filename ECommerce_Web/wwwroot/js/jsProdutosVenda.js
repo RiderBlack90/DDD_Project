@@ -1,6 +1,11 @@
 ﻿
 var ObjetoVenda = new Object();
 
+
+
+
+
+
 ObjetoVenda.CarregaProdutos = function()
 {
     $.ajax({
@@ -36,8 +41,53 @@ ObjetoVenda.CarregaProdutos = function()
         }
     });
 
+    
+
 }
+
+ObjetoVenda.AdicionarCarrinho = function (idProduto)
+    {
+        var nome = $("#nome_" + idProduto).text();
+        var qtd = $("#qtd_" + idProduto).val();
+
+        $.ajax({
+            type: "POST",
+            url: "api/AdicionarProdutoCarrinho",
+            dataType: "JSON",
+            cache: false,
+            async: true,
+            data: {
+                "id": idProduto, "nome": nome, "qtd": qtd
+            },
+            success: function (data) {
+                if (data.success) {
+                    ObjetoAlerta.AlertarTela(1, "Produto adicionado no carrinho!")
+                }
+                else {
+                    ObjetoAlerta.AlertarTela(2, "Necessário efetuar o login!")
+                }
+            }
+        })
+}
+
+ObjetoVenda.CarregaQtdCarrinho = function () {
+    $.ajax({
+        type: 'GET',
+        url: "/api/QtdProdutosCarrinho",
+        dataType: "JSON",
+        cache: false,
+        async: true,
+        success: function (data) {
+            if (data.sucesso) {
+                $("#qtdCarrinho").text("(" + data.qtd + ")");
+            }
+        }
+    });
+    setTimeout(ObjetoVenda.CarregaQtdCarrinho, 5000);
+}
+
 
 $(function () {
     ObjetoVenda.CarregaProdutos();
+    ObjetoVenda.CarregaQtdCarrinho();
 });

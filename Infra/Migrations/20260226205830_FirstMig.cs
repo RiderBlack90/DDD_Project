@@ -200,15 +200,14 @@ namespace Infra.Migrations
                     PRD_ID = table.Column<int>(type: "int", nullable: false),
                     CUS_ESTADO = table.Column<int>(type: "int", nullable: false),
                     CSU_QTD = table.Column<int>(type: "int", nullable: false),
-                    USR_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    USR_ID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_COMPRA_USUARIO", x => x.CUS_ID);
                     table.ForeignKey(
-                        name: "FK_TB_COMPRA_USUARIO_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_TB_COMPRA_USUARIO_AspNetUsers_USR_ID",
+                        column: x => x.USR_ID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -265,14 +264,14 @@ namespace Infra.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_COMPRA_USUARIO_ApplicationUserId",
-                table: "TB_COMPRA_USUARIO",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TB_COMPRA_USUARIO_PRD_ID",
                 table: "TB_COMPRA_USUARIO",
                 column: "PRD_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_COMPRA_USUARIO_USR_ID",
+                table: "TB_COMPRA_USUARIO",
+                column: "USR_ID");
         }
 
         /// <inheritdoc />

@@ -11,6 +11,7 @@ using Infra.Repositories;
 using Infra.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Domain.Interfaces.ICompraUser;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,9 +32,11 @@ builder.Services.AddControllersWithViews();
 // REPOSITORY
 builder.Services.AddScoped(typeof(IGeneric<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProduct, ProductRepository>();
+builder.Services.AddScoped<ICompraUsuario,CompraUsuarioRepository>();
 
 // APPLICATION
 builder.Services.AddScoped<InterfaceProductApp, ProductApp>();
+builder.Services.AddScoped<InterfaceCompraUsuarioApp, CompraUsuarioApp>();
 
 // DOMAIN
 builder.Services.AddScoped<IServicesProduct, ServiceProduct>();

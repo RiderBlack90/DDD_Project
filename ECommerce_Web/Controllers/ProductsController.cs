@@ -87,6 +87,9 @@ public class ProductsController : Controller
                 {
                     ModelState.AddModelError(item.PropertyName, item.mensagem);
                 }
+
+                ViewBag.Alerta = true;
+                ViewBag.Mensagem = "Ocorreu algum erro, verifique!";
                 return View("Edit", produto);
             }
 
@@ -133,11 +136,5 @@ public class ProductsController : Controller
     public async Task<JsonResult> ListarProdutosComEstoque()
     {
         return Json(await _IProductApp.ListarProdutosComEstoque());
-    }
-
-    [HttpPost("/api/AdicionarProdutoCarrinho")]
-    public async Task AdicionarProdutoCarrinho(string id, string nome, string qtd)
-    {
-        throw new NotImplementedException();
     }
 }

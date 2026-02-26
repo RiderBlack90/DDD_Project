@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20260225233940_FirstMig")]
+    [Migration("20260226205830_FirstMig")]
     partial class FirstMig
     {
         /// <inheritdoc />
@@ -132,10 +132,6 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Estado")
                         .HasColumnType("int")
                         .HasColumnName("CUS_ESTADO");
@@ -150,14 +146,14 @@ namespace Infra.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("USR_ID");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TB_COMPRA_USUARIO");
                 });
@@ -356,15 +352,15 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Entities.Entities.CompraUsuario", b =>
                 {
-                    b.HasOne("Entities.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Entities.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
