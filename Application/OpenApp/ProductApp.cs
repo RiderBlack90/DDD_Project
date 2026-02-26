@@ -49,8 +49,13 @@ public class ProductApp : InterfaceProductApp
     {
         await _IServicesProduct.UpdateProduct(produto);
     }
-    public async Task EditProduct(Produto produto)
+    public async Task AddProduct(Produto produto)
     {
         await _IServicesProduct.AddProduct(produto);
+    }
+
+    public async Task<List<Produto>> ListrarProdutosUsuario(string userId)
+    {
+        return await _IProduct.ListarProdutosUsuario(userId);
     }
 }

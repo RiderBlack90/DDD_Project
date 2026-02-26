@@ -130,6 +130,7 @@ namespace Infra.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Estado")
@@ -166,6 +167,14 @@ namespace Infra.Migrations
                         .HasColumnName("PRD_ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PRD_DATA_ALTERACAO");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PRD_DATA_CADASTRO");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(255)
@@ -346,7 +355,9 @@ namespace Infra.Migrations
                 {
                     b.HasOne("Entities.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entities.Entities.Produto", "Produto")
                         .WithMany()

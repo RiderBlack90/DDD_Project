@@ -2,6 +2,7 @@
 using Entities.Entities;
 using Infra.Configuration;
 using Infra.Repositories.Generics;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,20 @@ namespace Infra.Repositories;
 
 public class ProductRepository : GenericRepository<Produto>, IProduct
 {
-    public ProductRepository(ContextBase context) : base(context) { }
+    private readonly DbContextOptions<ContextBase> _optionsbuilder;
+
+    public ProductRepository()
+    {
+        _optionsbuilder = new DbContextOptions<ContextBase>();
+    }
+   
+
+    public async Task<List<Produto>> ListarProdutosUsuario(string userId)
+    {
+        using (var banco = new ContextBase(_optionsbuilder))
+        {
+            return await banco.Produtos.Where(p => p.UserId == userId).AsNoTracking().ToListAsync();
+        }
+    }
+
 }

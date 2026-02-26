@@ -1,43 +1,81 @@
 ﻿using Domain.Interfaces.Generics;
 using Infra.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32.SafeHandles;
+using System.Runtime.InteropServices;
 
 namespace Infra.Repositories.Generics;
 
-public class GenericRepository<T> : IGeneric<T> where T : class
+public class GenericRepository<T> : IGeneric<T>, IDisposable where T : class
 {
-    private readonly ContextBase _context;
+    private readonly DbContextOptions<ContextBase> _OptionsBuilder;
 
-    public GenericRepository(ContextBase context)
+    public GenericRepository()
     {
-        _context = context;
+        _OptionsBuilder = new DbContextOptions<ContextBase>();
     }
 
     public async Task Add(T Object)
     {
-        await _context.Set<T>().AddAsync(Object);
-        await _context.SaveChangesAsync();
+        using (var data = new ContextBase(_OptionsBuilder))
+        {
+            await data.Set<T>().AddAsync(Object);
+            await data.SaveChangesAsync();
+        }
     }
 
     public async Task Delete(T Object)
     {
-        _context.Set<T>().Remove(Object);
-        await _context.SaveChangesAsync();
+        using (var data = new ContextBase(_OptionsBuilder))
+        {
+            data.Set<T>().Remove(Object);
+            await data.SaveChangesAsync();
+        }
     }
 
     public async Task<T> GetEntityById(int id)
     {
-        return await _context.Set<T>().FindAsync(id);
+        using (var data = new ContextBase(_OptionsBuilder))
+        {
+            return await data.Set<T>().FindAsync(id);
+        }
     }
 
     public async Task<List<T>> List()
     {
-        return await _context.Set<T>().AsNoTracking().ToListAsync();
+        using (var data = new ContextBase(_OptionsBuilder))
+        {
+            return await data.Set<T>().AsNoTracking().ToListAsync();
+        }
     }
 
     public async Task Update(T Object)
     {
-        _context.Set<T>().Update(Object);
-        await _context.SaveChangesAsync();
+        using (var data = new ContextBase(_OptionsBuilder))
+        {
+            data.Set<T>().Update(Object);
+            await data.SaveChangesAsync();
+        }
     }
+
+    #region Dispose
+    bool disposed = false;
+    SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposed) return;
+        if (disposing)
+        {
+            handle.Dispose();
+        }
+        disposed = true;
+    }
+    #endregion
 }

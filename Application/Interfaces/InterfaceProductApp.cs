@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace Application.Interfaces;
 public interface InterfaceProductApp : GenericInterfaceApp<Produto>
 {
-    Task EditProduct(Produto produto);
+    Task AddProduct(Produto produto);
 
     Task UpdateProduct(Produto produto);
+
+    Task<List<Produto>> ListrarProdutosUsuario(string userId);
 }

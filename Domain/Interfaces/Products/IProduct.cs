@@ -9,4 +9,6 @@ using System.Threading.Tasks;
 namespace Domain.Interfaces.IProducts;
 public interface IProduct : IGeneric<Produto>
 {
+    Task<List<Produto>> ListarProdutosUsuario(string userId);
 }
+

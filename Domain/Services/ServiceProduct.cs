@@ -19,9 +19,12 @@ public class ServiceProduct : IServicesProduct
     {
         var ValidateName = produto.ValidateStringProperty(produto.Nome, "Nome");
         var ValidateValue = produto.ValidateDecimalValue(produto.Valor, "Valor");
+        var ValidateStock = produto.ValidateIntProperty(produto.QtdEstoque, "QtdEstoque");
 
-        if (ValidateName && ValidateValue)
+        if (ValidateName && ValidateValue && ValidateStock)
         {
+            produto.DataCadastro = DateTime.Now;
+            produto.DataAlteracao= DateTime.Now;
             produto.Estado = true;
             await _Iproduct.Add(produto);
         }
@@ -33,9 +36,11 @@ public class ServiceProduct : IServicesProduct
 
         var ValidateName = produto.ValidateStringProperty(produto.Nome, "Nome");
         var ValidateValue = produto.ValidateDecimalValue(produto.Valor, "Valor");
+        var ValidateStock = produto.ValidateIntProperty(produto.QtdEstoque, "QtdEstoque");
 
-        if (ValidateName && ValidateValue)
-        { 
+        if (ValidateName && ValidateValue && ValidateStock)
+        {
+            produto.DataAlteracao = DateTime.Now;
             await _Iproduct.Update(produto);
         }
     }

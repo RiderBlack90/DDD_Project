@@ -44,9 +44,16 @@ public class Produto : Notifiers
     public string? UserId { get; set; }
     public virtual ApplicationUser ApplicationUser { get; set; }
 
-
     [Column("PRD_ESTADO")]
     [Display(Name = "Estado")]
     public bool Estado { get; set; }
+
+    [Column("PRD_DATA_CADASTRO")]
+    [Display(Name = "Data de Cadastro")]
+    public DateTime DataCadastro { get; set; }
+
+    [Column("PRD_DATA_ALTERACAO")]
+    [Display(Name = "Data de Alteração")]
+    public DateTime DataAlteracao { get; set; }
 
 }

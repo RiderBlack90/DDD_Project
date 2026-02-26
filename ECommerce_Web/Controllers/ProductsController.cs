@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_ECommerce.Controllers;
@@ -9,17 +10,23 @@ namespace Web_ECommerce.Controllers;
 public class ProductsController : Controller
 {
     public readonly InterfaceProductApp _IProductApp;
-    public ProductsController(InterfaceProductApp interfaceProductApp)
+    public readonly UserManager<ApplicationUser> _userManager;
+    public ProductsController(InterfaceProductApp interfaceProductApp , UserManager<ApplicationUser> userManager)
     {
         _IProductApp = interfaceProductApp;
+        _userManager = userManager;
     }
     // GET: ProductsController
     public async Task<IActionResult> Index()
     {
-        return View(await _IProductApp.List());
+        var idUsuario = await RetornarIdUsuarioLogado();
+
+
+
+        return View(await _IProductApp.ListrarProdutosUsuario(idUsuario));
     }
 
-    // GET: ProductsController/Details/5
+    // GET: ProductsController/Details/5ff
     public async Task<IActionResult> Details(int id)
     {
         return View(await _IProductApp.GetEntityById(id));
@@ -38,7 +45,10 @@ public class ProductsController : Controller
     {
         try
         {
-            await _IProductApp.EditProduct(produto);
+            var idUsuario = await RetornarIdUsuarioLogado();
+            produto.UserId = idUsuario;
+
+            await _IProductApp.AddProduct(produto);
             if (produto.Notcations.Any())
             {
                 foreach (var item in produto.Notcations)
@@ -110,5 +120,11 @@ public class ProductsController : Controller
         {
             return View();
         }
+    }
+
+    private async Task<string> RetornarIdUsuarioLogado()
+    {
+        var idUsuario = await _userManager.GetUserAsync(User);
+        return idUsuario.Id;
     }
 }
