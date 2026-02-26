@@ -4,6 +4,7 @@ using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,12 @@ public class ServiceProduct : IServicesProduct
             await _Iproduct.Add(produto);
         }
 
+    }
+
+    public async Task<List<Produto>> ListarProdutosComEstoque()
+    {
+        return await _Iproduct.ListarProdutos(p => p.QtdEstoque > 0);
+    
     }
 
     public async Task UpdateProduct(Produto produto)

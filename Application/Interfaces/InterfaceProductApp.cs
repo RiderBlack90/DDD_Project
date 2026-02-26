@@ -13,4 +13,5 @@ public interface InterfaceProductApp : GenericInterfaceApp<Produto>
     Task UpdateProduct(Produto produto);
 
     Task<List<Produto>> ListrarProdutosUsuario(string userId);
+    Task<List<Produto>> ListarProdutosComEstoque();
 }

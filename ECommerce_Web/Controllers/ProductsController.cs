@@ -127,4 +127,17 @@ public class ProductsController : Controller
         var idUsuario = await _userManager.GetUserAsync(User);
         return idUsuario.Id;
     }
+
+    [AllowAnonymous]
+    [HttpGet("/api/ListarProdutosComEstoque")]
+    public async Task<JsonResult> ListarProdutosComEstoque()
+    {
+        return Json(await _IProductApp.ListarProdutosComEstoque());
+    }
+
+    [HttpPost("/api/AdicionarProdutoCarrinho")]
+    public async Task AdicionarProdutoCarrinho(string id, string nome, string qtd)
+    {
+        throw new NotImplementedException();
+    }
 }

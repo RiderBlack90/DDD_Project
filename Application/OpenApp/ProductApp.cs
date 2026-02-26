@@ -58,4 +58,9 @@ public class ProductApp : InterfaceProductApp
     {
         return await _IProduct.ListarProdutosUsuario(userId);
     }
+
+    public async Task<List<Produto>> ListarProdutosComEstoque()
+    {
+        return await _IServicesProduct.ListarProdutosComEstoque();
+    }
 }
