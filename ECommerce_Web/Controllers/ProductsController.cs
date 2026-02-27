@@ -11,10 +11,12 @@ public class ProductsController : Controller
 {
     public readonly InterfaceProductApp _IProductApp;
     public readonly UserManager<ApplicationUser> _userManager;
-    public ProductsController(InterfaceProductApp interfaceProductApp , UserManager<ApplicationUser> userManager)
+    public readonly InterfaceCompraUsuarioApp _ICompraUsuarioApp;
+    public ProductsController(InterfaceProductApp interfaceProductApp , UserManager<ApplicationUser> userManager, InterfaceCompraUsuarioApp ICompraUsuarioApp)
     {
         _IProductApp = interfaceProductApp;
         _userManager = userManager;
+        _ICompraUsuarioApp = ICompraUsuarioApp;
     }
     // GET: ProductsController
     public async Task<IActionResult> Index()
@@ -23,7 +25,7 @@ public class ProductsController : Controller
 
 
 
-        return View(await _IProductApp.ListrarProdutosUsuario(idUsuario));
+        return View(await _IProductApp.ListarProdutosUsuario(idUsuario));
     }
 
     // GET: ProductsController/Details/5ff
@@ -136,5 +138,35 @@ public class ProductsController : Controller
     public async Task<JsonResult> ListarProdutosComEstoque()
     {
         return Json(await _IProductApp.ListarProdutosComEstoque());
+    }
+
+    public async Task<IActionResult> ListarProdutosCarrinhoUsuario()
+    {
+        var idUsuario = await RetornarIdUsuarioLogado();
+        return View(await _IProductApp.ListarProdutosCarrinhoUsuario(idUsuario));
+    }
+
+
+    // GET: ProductsController/Delete/5
+    public async Task<IActionResult> RemoverCarrinho(int id)
+    {
+        return View(await _IProductApp.ObterProdutoCarrinho(id));
+    }
+
+    // POST: ProductsController/Delete/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoverCarrinho(int id, Produto produto)
+    {
+        try
+        {
+            var produtoDelete = await _ICompraUsuarioApp.GetEntityById(id);
+            await _ICompraUsuarioApp.Delete(produtoDelete);
+            return RedirectToAction(nameof(ListarProdutosCarrinhoUsuario));
+        }
+        catch
+        {
+            return View();
+        }
     }
 }

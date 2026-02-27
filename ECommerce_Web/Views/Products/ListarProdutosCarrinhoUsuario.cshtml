@@ -1,0 +1,41 @@
+﻿ @model IEnumerable<Entities.Entities.Produto>
+
+@{
+    ViewData["Title"] = "ListarProdutosCarrinhoUsuario";
+}
+
+<h1>Produtos no Carrinho</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdEstoque)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdEstoque)
+            </td>
+            <td>
+                <a asp-action="RemoverCarrinho" asp-route-id="@item.IdProdutoCarrinho">Remover</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

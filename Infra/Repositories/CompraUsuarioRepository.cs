@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.ICompraUser;
 using Entities.Entities;
+using Entities.Entities.Enums;
 using Infra.Configuration;
 using Infra.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,7 @@ public class CompraUsuarioRepository : GenericRepository<CompraUsuario> , ICompr
     {
         using (var banco = new ContextBase(_optionsbuilder))
         {
-            return await banco.ComprasUsuario
-                .Where(c => c.UserId == userId)
-                .CountAsync();
+            return await banco.ComprasUsuario.CountAsync(c => c.UserId == userId && c.Estado == EnumBoughtState.Carrinho);
         }
     }
 

@@ -56,4 +56,10 @@ public class Produto : Notifiers
     [Display(Name = "Data de Alteração")]
     public DateTime DataAlteracao { get; set; }
 
+    [NotMapped]
+    public int IdProdutoCarrinho { get; set; }
+
+    [NotMapped]
+    public int QtdCompra {  get; set; }
+
 }

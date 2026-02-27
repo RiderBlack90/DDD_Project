@@ -28,8 +28,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Meus Produtos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark">Meus carrinho <span id="qtdCarrinho"></span></a>
+                            <a asp-controller="Products" asp-action="ListarProdutosCarrinhoUsuario">
+                                <img src="~/img/carrinho.jpg" width="25" height="25" />
+                            </a>
+                            <span id="qtdCarrinho"></span>
                         </li>
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -41,12 +45,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - ECommerce_Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

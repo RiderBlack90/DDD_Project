@@ -5,6 +5,7 @@ using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,7 +55,7 @@ public class ProductApp : InterfaceProductApp
         await _IServicesProduct.AddProduct(produto);
     }
 
-    public async Task<List<Produto>> ListrarProdutosUsuario(string userId)
+    public async Task<List<Produto>> ListarProdutosUsuario(string userId)
     {
         return await _IProduct.ListarProdutosUsuario(userId);
     }
@@ -62,5 +63,15 @@ public class ProductApp : InterfaceProductApp
     public async Task<List<Produto>> ListarProdutosComEstoque()
     {
         return await _IServicesProduct.ListarProdutosComEstoque();
+    }
+
+    public async Task<List<Produto>> ListarProdutosCarrinhoUsuario(string userId)
+    {
+        return await _IProduct.ListarProdutosCarrinhoUsuario(userId);
+    }
+
+    public async Task<Produto> ObterProdutoCarrinho(int idProdutoCarrinho)
+    {
+        return await _IProduct.ObterProdutoCarrinho(idProdutoCarrinho);
     }
 }

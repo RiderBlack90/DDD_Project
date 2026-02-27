@@ -6,8 +6,9 @@ using System.Text;
 
 namespace Application.Interfaces;
 
+
 public interface InterfaceCompraUsuarioApp : IGeneric<CompraUsuario>
 {
-    Task<int> QuantidadeProdutoCarrinhoUsuario(string userId);
+    public Task<int> QuantidadeProdutoCarrinhoUsuario(string userId);
 
 }

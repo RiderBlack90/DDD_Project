@@ -33,13 +33,12 @@ public class CompraUsuarioApp : InterfaceCompraUsuarioApp
     {
         return await _ICompraUsuario.List();
     }
-    public async Task<int> QuantidadeProdutoCarrinhoUsuario(string userId)
-    {
-        return await _ICompraUsuario.QuantidadeProdutoCarrinhoUsuario(userId);
-    }
-
     public async Task Update(CompraUsuario Object)
     {
         await _ICompraUsuario.Update(Object);
+    }
+    public async Task<int> QuantidadeProdutoCarrinhoUsuario(string userId)
+    {
+        return await _ICompraUsuario.QuantidadeProdutoCarrinhoUsuario(userId);
     }
 }

@@ -79,11 +79,16 @@ ObjetoVenda.CarregaQtdCarrinho = function () {
         async: true,
         success: function (data) {
             if (data.sucesso) {
-                $("#qtdCarrinho").text("(" + data.qtd + ")");
-            }
+                if (data.qtd > 0) {
+                    $("#qtdCarrinho").text(data.qtd);
+                }
+                else {
+                    $("#qtdCarrinho").text("");
+                }
+             }
         }
     });
-    setTimeout(ObjetoVenda.CarregaQtdCarrinho, 5000);
+    setTimeout(ObjetoVenda.CarregaQtdCarrinho, 3000);
 }
 
 

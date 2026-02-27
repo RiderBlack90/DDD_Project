@@ -27,7 +27,7 @@ public class CompraUsuarioController : Controller
             {
                 ProdutoId = Convert.ToInt32(id),
                 QtdCompra = Convert.ToInt32(qtd),
-                Estado = EnumBoughtState.ACaminho,
+                Estado = EnumBoughtState.Carrinho,
                 UserId = usuario.Id
             });
         return Json(new { Success = true });

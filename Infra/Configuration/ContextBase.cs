@@ -9,7 +9,7 @@ public class ContextBase : IdentityDbContext<ApplicationUser>
 {
     public ContextBase(DbContextOptions<ContextBase> options) : base(options) { }
 
-    public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Produto> Produto { get; set; }
     public DbSet<CompraUsuario> ComprasUsuario { get; set; } 
     public DbSet<ApplicationUser> ApplicationUser { get; set; } 
 
