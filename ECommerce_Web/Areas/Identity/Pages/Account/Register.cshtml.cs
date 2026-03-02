@@ -2,14 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using Entities.Entities.Enums;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ECommerce_Web.Areas.Identity.Pages.Account
 {
@@ -78,6 +79,9 @@ namespace ECommerce_Web.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+            [Required]
+            [Display(Name = "Nome")]
+            public string Nome { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -97,7 +101,14 @@ namespace ECommerce_Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            public string? CPF { get; set; }
+            public string? CEP { get; set; }
+            public string? Telefone { get; set; }
+            public string? Endereco { get; set; }
+            public string? CompEndereco { get; set; }
+            public int Idade { get; set; }
         }
+        
 
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -112,10 +123,21 @@ namespace ECommerce_Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new ApplicationUser
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    CPF = Input.CPF,
+                    CEP = Input.CEP,
+                    Telefone = Input.Telefone,
+                    Endereco = Input.Endereco,
+                    CompEndereco = Input.CompEndereco,
+                    Idade = Input.Idade,
+                    Nome = Input.Nome,
+                    Estado = true,
+                    Tipo = TypeUser.Comum
+                };
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

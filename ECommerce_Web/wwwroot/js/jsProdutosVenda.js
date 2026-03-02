@@ -85,7 +85,7 @@ ObjetoVenda.CarregaQtdCarrinho = function () {
                 else {
                     $("#qtdCarrinho").text("");
                 }
-             }
+            }
         }
     });
     setTimeout(ObjetoVenda.CarregaQtdCarrinho, 3000);

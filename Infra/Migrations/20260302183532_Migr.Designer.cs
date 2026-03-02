@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20260227193743_FirstMig")]
-    partial class FirstMig
+    [Migration("20260302183532_Migr")]
+    partial class Migr
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

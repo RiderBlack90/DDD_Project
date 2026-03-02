@@ -75,7 +75,7 @@ public class ProductsController : Controller
         return View(await _IProductApp.GetEntityById(id));
     }
 
-    // POST: ProductsController/Edit/5
+    // POST: ProductsController/Edit/50
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<ActionResult> EditAsync(int id, Produto produto)
