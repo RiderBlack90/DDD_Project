@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input asp-for="Id" type="hidden" />
@@ -38,6 +38,12 @@
                 <label asp-for="QtdEstoque" class="control-label"></label>
                 <input asp-for="QtdEstoque" class="form-control" />
                 <span asp-validation-for="QtdEstoque" class="text-danger"></span>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <p>Selecione sua Imagem com tamanho maximo de 600X600</p>
+                        <input type="file" name="Imagem" asp-for="Imagem" multiple />
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">

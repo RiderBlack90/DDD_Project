@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Migr : Migration
+    public partial class UrlImplementation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -179,7 +179,8 @@ namespace Infra.Migrations
                     PRD_QTD_ESTOQUE = table.Column<int>(type: "int", nullable: false),
                     PRD_ESTADO = table.Column<bool>(type: "bit", nullable: false),
                     PRD_DATA_CADASTRO = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PRD_DATA_ALTERACAO = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PRD_DATA_ALTERACAO = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PRD_URL = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

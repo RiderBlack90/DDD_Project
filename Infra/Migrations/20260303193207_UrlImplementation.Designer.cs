@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20260302183532_Migr")]
-    partial class Migr
+    [Migration("20260303193207_UrlImplementation")]
+    partial class UrlImplementation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,6 +197,10 @@ namespace Infra.Migrations
                     b.Property<int>("QtdEstoque")
                         .HasColumnType("int")
                         .HasColumnName("PRD_QTD_ESTOQUE");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRD_URL");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)")

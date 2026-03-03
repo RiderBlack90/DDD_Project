@@ -1,5 +1,6 @@
 ﻿using Entities.Entities.Enums;
 using Entities.Notifications;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -61,5 +62,11 @@ public class Produto : Notifiers
 
     [NotMapped]
     public int QtdCompra {  get; set; }
+
+    [NotMapped]
+    public IFormFile Imagem { get; set; }
+
+    [Column("PRD_URL")]
+    public string? Url { get; set; }
 
 }

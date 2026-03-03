@@ -24,9 +24,9 @@ var connectionString2 = builder.Configuration.GetConnectionString("ContextBaseCo
 builder.Services.AddDbContext<ContextBase>(options =>
     options.UseSqlServer(connectionString2));
 
-
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
+
 builder.Services.AddControllersWithViews();
 
 // REPOSITORY
@@ -66,7 +66,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 app.MapRazorPages()
    .WithStaticAssets();
 

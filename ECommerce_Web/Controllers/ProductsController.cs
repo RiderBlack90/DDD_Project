@@ -12,11 +12,13 @@ public class ProductsController : Controller
     public readonly InterfaceProductApp _IProductApp;
     public readonly UserManager<ApplicationUser> _userManager;
     public readonly InterfaceCompraUsuarioApp _ICompraUsuarioApp;
-    public ProductsController(InterfaceProductApp interfaceProductApp , UserManager<ApplicationUser> userManager, InterfaceCompraUsuarioApp ICompraUsuarioApp)
+    private IWebHostEnvironment _environment;
+    public ProductsController(InterfaceProductApp interfaceProductApp , UserManager<ApplicationUser> userManager, InterfaceCompraUsuarioApp ICompraUsuarioApp, IWebHostEnvironment environment)
     {
         _IProductApp = interfaceProductApp;
         _userManager = userManager;
         _ICompraUsuarioApp = ICompraUsuarioApp;
+        _environment = environment;
     }
     // GET: ProductsController
     public async Task<IActionResult> Index()
@@ -44,13 +46,15 @@ public class ProductsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Produto produto)
-    {
+    {   
         try
         {
             var idUsuario = await RetornarIdUsuarioLogado();
             produto.UserId = idUsuario;
+            
 
             await _IProductApp.AddProduct(produto);
+            await SalvarImagemProduto(produto);
             if (produto.Notcations.Any())
             {
                 foreach (var item in produto.Notcations)
@@ -169,4 +173,27 @@ public class ProductsController : Controller
             return View();
         }
     }
+
+    public async Task SalvarImagemProduto(Produto produtoTela)
+    {
+        var produto = await _IProductApp.GetEntityById(produtoTela.Id);
+
+        if (produtoTela.Imagem != null)
+        {
+            var webRoot = _environment.WebRootPath;
+
+            var Extension = System.IO.Path.GetExtension(produtoTela.Imagem.FileName);
+
+            var NomeArquivo = string.Concat(produto.Id.ToString(), Extension);
+
+            var diretorioArquivoSalvar = string.Concat(webRoot, "\\imgProdutos\\", NomeArquivo);
+
+            produtoTela.Imagem.CopyTo(new FileStream(diretorioArquivoSalvar, FileMode.Create));
+
+            produto.Url = string.Concat("https://localhost:7006", "/imgProdutos/", NomeArquivo);
+
+            await _IProductApp.UpdateProduct(produto);
+        }
+    }
+
 }

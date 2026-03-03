@@ -195,6 +195,10 @@ namespace Infra.Migrations
                         .HasColumnType("int")
                         .HasColumnName("PRD_QTD_ESTOQUE");
 
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PRD_URL");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)")
                         .HasColumnOrder(1);
