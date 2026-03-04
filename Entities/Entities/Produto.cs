@@ -64,7 +64,7 @@ public class Produto : Notifiers
     public int QtdCompra {  get; set; }
 
     [NotMapped]
-    public IFormFile Imagem { get; set; }
+    public IFormFile? Imagem { get; set; }
 
     [Column("PRD_URL")]
     public string? Url { get; set; }

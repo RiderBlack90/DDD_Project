@@ -40,6 +40,7 @@ builder.Services.AddScoped<InterfaceCompraUsuarioApp, CompraUsuarioApp>();
 
 // DOMAIN
 builder.Services.AddScoped<IServicesProduct, ServiceProduct>();
+builder.Services.AddScoped<IServiceCompraUsuario, ServiceCompraUsuario>();
 
 var app = builder.Build();
 

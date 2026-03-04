@@ -10,5 +10,8 @@ namespace Application.Interfaces;
 public interface InterfaceCompraUsuarioApp : IGeneric<CompraUsuario>
 {
     public Task<int> QuantidadeProdutoCarrinhoUsuario(string userId);
+    public Task<CompraUsuario> CarrinhoCompras(string userId);
+    public Task<CompraUsuario> ProdutosComprados(string userId);
+    public Task<bool> ConfirmaCompraCarrinhoUsuario(string userId);
 
 }

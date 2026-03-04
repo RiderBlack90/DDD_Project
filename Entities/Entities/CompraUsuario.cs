@@ -31,5 +31,20 @@ public class CompraUsuario : Notifiers
 
     [ForeignKey("UserId")]
     public ApplicationUser ApplicationUser { get; set; } = null!;
+
+    [NotMapped]
+    [Display(Name = "Quantidade Total")]
+    public int QuantidadeProdutos { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Valor Total")]
+    public decimal ValorTotal { get; set; }
+
+    [NotMapped]
+    [Display(Name = "Endereço de entrega")]
+    public string? EnderecoCompleto { get; set; }
+
+    [NotMapped]
+    public List<Produto>? ListaProdutos { get; set; }
 }
 
