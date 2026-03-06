@@ -32,10 +32,14 @@ public class ServiceProduct : IServicesProduct
 
     }
 
-    public async Task<List<Produto>> ListarProdutosComEstoque()
+    public async Task<List<Produto>> ListarProdutosComEstoque(string descricao)
     {
+        if (string.IsNullOrWhiteSpace(descricao))
         return await _Iproduct.ListarProdutos(p => p.QtdEstoque > 0);
-    
+        else
+        {
+            return await _Iproduct.ListarProdutos(p => p.QtdEstoque > 0 && p.Nome.ToUpper().Contains(descricao.ToUpper()));
+        }
     }
 
     public async Task UpdateProduct(Produto produto)

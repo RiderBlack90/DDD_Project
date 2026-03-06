@@ -12,5 +12,5 @@ public interface IServicesProduct
     Task AddProduct(Produto produto);
 
     Task UpdateProduct(Produto produto);
-    Task<List<Produto>> ListarProdutosComEstoque();
+    Task<List<Produto>> ListarProdutosComEstoque(string descricao);
 }

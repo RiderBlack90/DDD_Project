@@ -139,9 +139,9 @@ public class ProductsController : Controller
 
     [AllowAnonymous]
     [HttpGet("/api/ListarProdutosComEstoque")]
-    public async Task<JsonResult> ListarProdutosComEstoque()
+    public async Task<JsonResult> ListarProdutosComEstoque(string descricao)
     {
-        return Json(await _IProductApp.ListarProdutosComEstoque());
+        return Json(await _IProductApp.ListarProdutosComEstoque(descricao));
     }
 
     public async Task<IActionResult> ListarProdutosCarrinhoUsuario()
